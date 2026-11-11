@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "events": [
+    {
+      "id": "double-xp-2026-11-13",
+      "name": "Double XP Weekend",
+      "blurb": "Every bit of XP counts twice, all weekend long.",
+      "icon": "icon_star",
+      "start": "2026-11-13",
+      "end": "2026-11-15",
+      "xpMultiplier": 2
+    },
+    {
+      "id": "thanksgiving-2026",
+      "name": "Thanksgiving Feast",
+      "blurb": "Bigfoot is cooking for everyone. His orders pay 50% more.",
+      "icon": "icon_festival",
+      "start": "2026-11-26",
+      "end": "2026-11-29",
+      "orderCoinMultiplier": 1.5
+    },
+    {
+      "id": "new-year-2027",
+      "name": "New Year Growth Spurt",
+      "blurb": "Fresh start, fast crops. Everything you plant gets a 25% head start.",
+      "icon": "icon_fest_frost",
+      "start": "2027-01-01",
+      "end": "2027-01-03",
+      "growBoost": 0.25
+    }
+  ]
+}
