@@ -3,34 +3,461 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cryptid Hollow Support</title>
-<link rel="stylesheet" href="style.css">
+<title>Cryptid Hollow</title>
+<meta name="description" content="A cozy farming game for iPhone and iPad where Bigfoot runs the general store, Mothman delivers the mail and Nessie lives in the pond. Coming soon.">
+<meta property="og:title" content="Cryptid Hollow">
+<meta property="og:description" content="A cozy farming game where your neighbors are cryptids. Coming soon to iPhone and iPad.">
+<meta property="og:image" content="https://thisgeekrh.github.io/cryptidhollow-site/assets/shot_town.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Nunito:ital,wght@0,400;0,600;0,800;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --hollow: #16231f;      /* the woods at night */
+  --moss: #22382e;
+  --parchment: #dcc08f;   /* the game's cards */
+  --parchment-deep: #c9a774;
+  --ink: #2e2034;
+  --lamp: #ee9b2f;        /* the game's orange card frame */
+  --stud: #c4dceb;        /* its pale corner studs */
+  --moon: #a79be0;
+  --cream: #f7ebc8;
+  --soft: #b9c7b4;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--hollow);
+  color: var(--cream);
+  font: 18px/1.65 "Nunito", system-ui, sans-serif;
+}
+img.px { image-rendering: pixelated; image-rendering: crisp-edges; }
+a { color: var(--lamp); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--moon); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: "Pixelify Sans", "Nunito", sans-serif; font-weight: 700; line-height: 1.1; margin: 0; }
+h2 { font-size: clamp(30px, 5vw, 44px); color: var(--cream); }
+h3 { font-size: 24px; }
+p { margin: 0 0 14px; }
+.wrap { width: min(1120px, 100% - 32px); margin: 0 auto; }
+.narrow { width: min(680px, 100% - 32px); margin: 0 auto; }
+
+/* The game's card frame: a thick orange border with small pale studs in the corners. */
+.frame {
+  position: relative;
+  border: 6px solid var(--lamp);
+  box-shadow: 0 0 0 3px var(--ink), inset 0 0 0 3px var(--ink);
+  background: var(--parchment);
+  border-radius: 4px;
+}
+.frame::before, .frame::after, .frame > .stud-b::before, .frame > .stud-b::after {
+  content: ""; position: absolute; width: 12px; height: 12px;
+  background: var(--stud); box-shadow: 0 0 0 3px var(--ink); z-index: 2;
+}
+.frame::before { top: -9px; left: -9px; }
+.frame::after { top: -9px; right: -9px; }
+.frame > .stud-b::before { bottom: -9px; left: -9px; }
+.frame > .stud-b::after { bottom: -9px; right: -9px; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 56px 0 72px;
+  background:
+    radial-gradient(ellipse 60% 50% at 78% 30%, rgba(238,155,47,.14), transparent 70%),
+    linear-gradient(#101a2b 0%, #172a2a 55%, var(--hollow) 100%);
+}
+.hero-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 48px; align-items: center; }
+.title-row { display: flex; align-items: flex-end; gap: 14px; }
+.hero h1 { font-size: clamp(52px, 8.5vw, 104px); color: var(--cream); letter-spacing: 1px; text-shadow: 0 4px 0 var(--ink); }
+.moth { width: 72px; height: 96px; flex: none; margin-bottom: 8px; animation: hover 3.2s ease-in-out infinite; }
+@keyframes hover { 50% { transform: translateY(-10px); } }
+.tagline { font-size: clamp(20px, 2.4vw, 25px); margin: 18px 0 10px; max-width: 30ch; }
+.hero .detail { color: var(--soft); max-width: 42ch; }
+.cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 26px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: "Pixelify Sans", sans-serif; font-size: 20px;
+  color: var(--ink); background: var(--parchment);
+  padding: 10px 18px; border: 3px solid var(--ink); border-radius: 6px;
+  box-shadow: 0 4px 0 var(--ink);
+}
+.badge img { width: 26px; height: 26px; }
+.button {
+  display: inline-block; text-decoration: none;
+  font-family: "Pixelify Sans", sans-serif; font-size: 20px;
+  color: var(--cream); background: #3e8a5a;
+  padding: 10px 20px; border: 3px solid var(--ink); border-radius: 6px;
+  box-shadow: inset 0 0 0 3px #57a873, 0 4px 0 var(--ink);
+}
+.button:hover { background: #47996a; }
+.textlink { color: var(--cream); font-weight: 600; }
+.trailer { padding: 0; background: var(--ink); line-height: 0; }
+.trailer video { width: 100%; height: auto; display: block; }
+.fireflies span {
+  position: absolute; width: 5px; height: 5px; border-radius: 50%;
+  background: #ffe48a; box-shadow: 0 0 10px 3px rgba(255,214,110,.6);
+  animation: drift 9s ease-in-out infinite; opacity: 0;
+}
+@keyframes drift {
+  0% { opacity: 0; transform: translate(0,0); }
+  20%, 70% { opacity: .9; }
+  100% { opacity: 0; transform: translate(40px,-60px); }
+}
+
+/* ---------- Millie's letter ---------- */
+.letter-section { padding: 72px 0 40px; }
+.letter {
+  background: #f1dfb6;
+  color: var(--ink);
+  padding: 34px 38px 30px;
+  border-radius: 3px;
+  box-shadow: 0 2px 0 #c9a774, 0 18px 40px rgba(0,0,0,.35);
+  transform: rotate(-1deg);
+  font-size: 19px;
+}
+.letter .from { display: flex; align-items: center; gap: 16px; margin-bottom: 16px; }
+.letter .from img { width: 50px; height: 88px; }
+.letter h2 { color: var(--ink); font-size: 30px; }
+.letter .sign { font-style: italic; margin: 0; }
+.letter .ps { font-size: 16px; color: #5b4a52; margin-top: 12px; }
+
+/* ---------- Neighbors ---------- */
+.neighbors { padding: 64px 0 72px; }
+.section-intro { color: var(--soft); max-width: 56ch; margin-top: 12px; }
+.grid {
+  display: grid; gap: 18px; margin-top: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.neighbor {
+  background: var(--parchment); color: var(--ink);
+  border: 3px solid var(--ink); border-radius: 8px;
+  padding: 16px 18px 18px;
+  display: grid; grid-template-columns: 64px 1fr; gap: 4px 14px; align-items: start;
+}
+.neighbor img { width: 64px; height: auto; grid-row: span 3; align-self: center; }
+.neighbor h3 { font-size: 22px; }
+.neighbor .job { font-size: 15px; font-weight: 800; color: #6b4f2f; margin: 0; }
+.neighbor .says { font-size: 15px; font-style: italic; margin: 6px 0 0; grid-column: 1 / -1; }
+
+/* ---------- What you'll do ---------- */
+.life { padding: 72px 0; background: var(--moss); }
+.life .rows { display: grid; gap: 64px; margin-top: 40px; }
+.row { display: grid; grid-template-columns: 1.35fr 1fr; gap: 44px; align-items: center; }
+.row:nth-child(even) { grid-template-columns: 1fr 1.35fr; }
+.row:nth-child(even) .shot { order: 2; }
+.shot img {
+  width: 100%; height: auto; display: block;
+  border: 4px solid var(--ink); border-radius: 10px;
+  box-shadow: 0 6px 0 rgba(0,0,0,.35);
+}
+.row h3 { color: var(--lamp); font-size: 28px; margin-bottom: 12px; }
+.row p { color: var(--cream); }
+
+/* ---------- Farmhouse ---------- */
+.house-section { padding: 80px 0 64px; }
+.street-scroll { overflow-x: auto; margin-top: 40px; padding-bottom: 8px; }
+.street { display: flex; align-items: stretch; list-style: none; padding: 0; margin: 0; min-width: 760px; }
+.stage { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.stage img { height: auto; margin-top: auto; display: block; }
+.stage .ground { align-self: stretch; height: 10px; background: #5a7a46; box-shadow: 0 8px 0 #3d5531; margin-bottom: 26px; }
+.stage strong { font-family: "Pixelify Sans", sans-serif; font-weight: 500; font-size: 18px; color: var(--cream); padding: 0 6px; }
+.stage .note { font-size: 15px; color: var(--soft); padding: 0 6px; min-height: 3.2em; }
+
+/* ---------- Little things ---------- */
+.little { padding: 48px 0 80px; }
+.little ul { list-style: none; padding: 0; margin: 28px 0 0; display: grid; gap: 16px 40px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.little li { display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: start; }
+.little li img { width: 36px; height: 36px; object-fit: contain; }
+.little li span { color: var(--soft); }
+.little li strong { color: var(--cream); }
+
+/* ---------- Coming soon ---------- */
+.soon { padding: 0 0 80px; }
+.soon .frame { color: var(--ink); padding: 34px 36px; text-align: center; }
+.soon h2 { color: var(--ink); }
+.soon p { max-width: 52ch; margin: 14px auto 22px; }
+
+/* ---------- Help ---------- */
+.help { padding: 64px 0 40px; border-top: 2px solid #2c4639; }
+.help h2 { font-size: 32px; margin-bottom: 18px; }
+.help details { border-bottom: 1px solid #2c4639; padding: 14px 0; }
+.help summary { cursor: pointer; font-weight: 800; }
+.help details p { color: var(--soft); margin: 10px 0 0; }
+footer { padding: 28px 0 48px; color: var(--soft); font-size: 15px; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+footer a { color: var(--soft); }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 860px) {
+  .hero { padding-top: 36px; }
+  .hero-grid, .row, .row:nth-child(even) { grid-template-columns: 1fr; gap: 28px; }
+  .row:nth-child(even) .shot { order: 0; }
+  .moth { width: 54px; height: 72px; }
+  .letter { padding: 26px 22px; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .moth, .fireflies span { animation: none; }
+  .fireflies { display: none; }
+  html { scroll-behavior: auto; }
+}
+</style>
 </head>
 <body>
-<main>
-<header>
-  <img src="icon.png" alt="Cryptid Hollow app icon">
-  <div>
-    <h1>Cryptid Hollow</h1>
-    <p class="sub">A cozy farming game where your neighbors are legends. By Jobin LLC.</p>
+
+<header class="hero">
+  <div class="fireflies" aria-hidden="true">
+    <span style="left:8%;top:30%;animation-delay:0s"></span>
+    <span style="left:22%;top:72%;animation-delay:2.5s"></span>
+    <span style="left:41%;top:18%;animation-delay:5s"></span>
+    <span style="left:55%;top:84%;animation-delay:1.2s"></span>
+    <span style="left:88%;top:12%;animation-delay:3.8s"></span>
+    <span style="left:94%;top:66%;animation-delay:6.4s"></span>
+  </div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="title-row">
+        <h1>Cryptid Hollow</h1>
+        <img class="px moth" src="assets/mothman.png" alt="">
+      </div>
+      <p class="tagline">A cozy farming game where your neighbors are cryptids.</p>
+      <p class="detail">Bigfoot runs the general store, Mothman delivers the mail, and Nessie lives in the pond out back. Grow crops, fill orders and fix up your Great-Aunt Millie's farmhouse in a little town full of legends.</p>
+      <div class="cta-row">
+        <span class="badge"><img class="px" src="assets/moonstone.png" alt="">Coming soon to iPhone and iPad</span>
+        <a class="textlink" href="#neighbors">Meet the neighbors</a>
+      </div>
+    </div>
+    <div class="frame trailer">
+      <span class="stud-b"></span>
+      <video src="assets/trailer.mp4" poster="assets/trailer_poster.jpg" autoplay muted loop playsinline aria-label="A short look at the farm, the town square, Bigfoot's orders and fishing with Nessie"></video>
+    </div>
   </div>
 </header>
 
-<div class="card">
-  <p>Bigfoot runs the general store, Mothman delivers your mail and Nessie wants to go fishing. Grow crops, raise animals, fill orders and build the farm of your dreams in a hollow full of friendly cryptids.</p>
-</div>
+<main>
 
-<h2>Need help?</h2>
-<p>Email <a href="mailto:mattstrattdev@icloud.com">mattstrattdev@icloud.com</a> and we'll get back to you. It helps to include your device, iOS version and what happened.</p>
+<section class="letter-section" aria-labelledby="letter-title">
+  <div class="narrow">
+    <article class="letter">
+      <div class="from">
+        <img class="px" src="assets/millie.png" alt="Great-Aunt Millie">
+        <h2 id="letter-title">A letter from Millie</h2>
+      </div>
+      <p>Dear one,</p>
+      <p>If you're reading this, the farm is yours. The porch sags, the roof leaks, and there's a raccoon named Gerald who thinks he pays rent. He does not.</p>
+      <p>The neighbors are a little unusual. Bigfoot will take good care of you, as long as you don't point a camera at him. Mothman brings the mail, mostly to the right house. And if the Jersey Devil ever mentions five dollars, change the subject.</p>
+      <p class="sign">With love (and a few unpaid IOUs),<br>Great-Aunt Mildred "Millie" Mudwhistle</p>
+      <p class="ps">P.S. Fix up the house one room at a time. I hid a note in every corner.</p>
+    </article>
+  </div>
+</section>
 
-<h2>Common questions</h2>
-<p><strong>Will my farm move to my new iPhone or iPad?</strong> Yes. Your farm is saved in your iCloud account, so sign in with the same Apple Account and it comes along.</p>
-<p><strong>I bought Moonstones but didn't get them.</strong> Open the shop and tap <em>Restore purchases</em>. If that doesn't fix it, email us.</p>
-<p><strong>How do I visit a friend's farm?</strong> Tap the farmhouse, open the Friends tab, and enter their farm code.</p>
+<section class="neighbors" id="neighbors" aria-labelledby="neighbors-title">
+  <div class="wrap">
+    <h2 id="neighbors-title">Meet the neighbors</h2>
+    <p class="section-intro">Everyone in the Hollow has a job, a story to tell, and something to say about you. New neighbors move in as your farm grows.</p>
+    <div class="grid">
+      <article class="neighbor">
+        <img class="px" src="assets/bigfoot.png" alt="">
+        <h3>Bigfoot</h3>
+        <p class="job">Runs the general store</p>
+        <p class="says">"No photos, please. I'm not ready for my close-up."</p>
+      </article>
+      <article class="neighbor">
+        <img class="px" src="assets/mothman.png" alt="">
+        <h3>Mothman</h3>
+        <p class="job">Delivers the mail</p>
+        <p class="says">"I delivered your mail today. Mostly to you. That's growth."</p>
+      </article>
+      <article class="neighbor">
+        <img class="px" src="assets/nessie.png" alt="">
+        <h3>Nessie</h3>
+        <p class="job">Lives in the pond, loves fishing</p>
+        <p class="says">"Someone took a blurry photo of me again. Blurry is my best angle."</p>
+      </article>
+      <article class="neighbor">
+        <img class="px" src="assets/kraken.png" alt="">
+        <h3>Captain Kraken</h3>
+        <p class="job">Runs the ferry</p>
+        <p class="says">"My ship isn't late. The ocean is early."</p>
+      </article>
+      <article class="neighbor">
+        <img class="px" src="assets/chupacabra.png" alt="">
+        <h3>The Chupacabra</h3>
+        <p class="job">Makes cheese at the Creamery</p>
+        <p class="says">"Everything here is made with milk. Only milk. Why do you ask?"</p>
+      </article>
+      <article class="neighbor">
+        <img class="px" src="assets/owlman.png" alt="">
+        <h3>The Owlman</h3>
+        <p class="job">Runs the coffee cart</p>
+        <p class="says">"Cream? Sugar? I don't know those words."</p>
+      </article>
+      <article class="neighbor">
+        <img class="px" src="assets/jackalope.png" alt="">
+        <h3>The Jackalope</h3>
+        <p class="job">Runs the sugar mill</p>
+        <p class="says">"I'm not hyper. I'm just enthusiastic at a very high speed."</p>
+      </article>
+      <article class="neighbor">
+        <img class="px" src="assets/yeti.png" alt="">
+        <h3>The Yeti</h3>
+        <p class="job">Scoops ice cream</p>
+        <p class="says">"It's not a beard. It's frost. I've been frosty since 1952."</p>
+      </article>
+      <article class="neighbor">
+        <img class="px" src="assets/jerseyDevil.png" alt="">
+        <h3>The Jersey Devil</h3>
+        <p class="job">Bakes pies at the diner</p>
+        <p class="says">"If anyone asks, I paid Millie back. In spirit."</p>
+      </article>
+    </div>
+  </div>
+</section>
 
-<nav><a href="privacy.html">Privacy Policy</a></nav>
-<footer>© 2026 Jobin LLC</footer>
+<section class="life" aria-labelledby="life-title">
+  <div class="wrap">
+    <h2 id="life-title">Life in the Hollow</h2>
+    <div class="rows">
+      <div class="row">
+        <div class="shot"><img src="assets/shot_farm.jpg" alt="A farm with planted fields, a red barn, trees and a horse" loading="lazy"></div>
+        <div>
+          <h3>Grow your farm</h3>
+          <p>Plant wheat, corn, pumpkins and more, then swipe across your fields to harvest. Raise chickens, cows and sheep, and turn your crops into bread, cheese and pie.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="shot"><img src="assets/shot_orders.jpg" alt="Bigfoot's Orders card in the town square" loading="lazy"></div>
+        <div>
+          <h3>Fill Bigfoot's orders</h3>
+          <p>The general store always needs something. Fill orders for coins, load Captain Kraken's ferry, and sell your extras to other farmers at the Roadside Stand.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="shot"><img src="assets/shot_creamery.jpg" alt="The Chupacabra's Creamery card" loading="lazy"></div>
+        <div>
+          <h3>Build workshops, gain neighbors</h3>
+          <p>Every new building comes with a cryptid to run it. Each one has their own story, told a chapter at a time as you become friends.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="shot"><img src="assets/shot_fishing.jpg" alt="Fishing with Nessie on the pond" loading="lazy"></div>
+        <div>
+          <h3>Go fishing with Nessie</h3>
+          <p>Cast a line in the pond, wait for the bobber to dip, and reel it in. Keep an eye out for the Golden Koi.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="shot"><img src="assets/shot_build.jpg" alt="Build mode with decorations to place on the farm" loading="lazy"></div>
+        <div>
+          <h3>Decorate every corner</h3>
+          <p>Lay paths, place lamps, plant flower beds and put up a Bigfoot statue. Move anything, anytime, and clear the overgrown woods to make room for more.</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="shot"><img src="assets/shot_pass.jpg" alt="The town square with the Hollow Pass card" loading="lazy"></div>
+        <div>
+          <h3>Festivals, derbies and a monthly pass</h3>
+          <p>Seasonal festivals with prizes you can't get anywhere else, a weekly derby with your friends, and a new Hollow Pass every month with a reward at every step.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="house-section" aria-labelledby="house-title">
+  <div class="wrap">
+    <h2 id="house-title">Fix up Millie's farmhouse</h2>
+    <p class="section-intro">Millie left you a run-down shack. Patch it up one piece at a time, and each fix-up turns up another of her funny notes. It's a slow, cozy goal you'll keep coming back to.</p>
+    <div class="street-scroll">
+    <ol class="street" aria-label="Farmhouse stages, from the old place to Mudwhistle Manor">
+      <li class="stage">
+        <img class="px" src="assets/house_1.png" alt="" style="width:79px">
+        <span class="ground"></span>
+        <strong>The old place</strong><span class="note">Saggy porch, one raccoon</span>
+      </li>
+      <li class="stage">
+        <img class="px" src="assets/house_2.png" alt="" style="width:79px">
+        <span class="ground"></span>
+        <strong>A new roof</strong><span class="note">No more buckets</span>
+      </li>
+      <li class="stage">
+        <img class="px" src="assets/house_3.png" alt="" style="width:79px">
+        <span class="ground"></span>
+        <strong>Fresh paint</strong><span class="note">Pick your colors</span>
+      </li>
+      <li class="stage">
+        <img class="px" src="assets/house_4.png" alt="" style="width:159px">
+        <span class="ground"></span>
+        <strong>The kitchen</strong><span class="note">Room to bake</span>
+      </li>
+      <li class="stage">
+        <img class="px" src="assets/house_5.png" alt="" style="width:169px">
+        <span class="ground"></span>
+        <strong>A second floor</strong><span class="note">And an attic window</span>
+      </li>
+      <li class="stage">
+        <img class="px" src="assets/house_6.png" alt="" style="width:179px">
+        <span class="ground"></span>
+        <strong>Mudwhistle Manor</strong><span class="note">Millie would be proud</span>
+      </li>
+    </ol>
+    </div>
+  </div>
+</section>
+
+<section class="little" aria-labelledby="little-title">
+  <div class="wrap">
+    <h2 id="little-title">And a lot of little surprises</h2>
+    <ul>
+      <li><img class="px" src="assets/letter.png" alt=""><div><strong>Mothman's mail.</strong> <span>A gift every day, a prophecy every week, and the occasional letter meant for someone else.</span></div></li>
+      <li><img class="px" src="assets/gerald.png" alt=""><div><strong>Gerald the raccoon.</strong> <span>He borrows things from your barn. Catch him after dark and he'll give them back, with interest.</span></div></li>
+      <li><img class="px" src="assets/sheepsquatch.png" alt=""><div><strong>Seasons.</strong> <span>Fall leaves, winter sweaters on your cows, and a costume week where everyone dresses up as someone else.</span></div></li>
+      <li><img class="px" src="assets/lizardMan.png" alt=""><div><strong>A coffee rivalry.</strong> <span>The Owlman serves black coffee only. Lizard Man draws you latte art. They do not get along.</span></div></li>
+      <li><img class="px" src="assets/coin.png" alt=""><div><strong>The five dollars.</strong> <span>The Jersey Devil has owed Millie five dollars since 1974. He's paying it back. Five cents at a time.</span></div></li>
+      <li><img class="px" src="assets/crop_corn_icon.png" alt=""><div><strong>Visit your friends.</strong> <span>Share your farm with a code, help water a friend's fields, and send gifts back and forth.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="soon" aria-labelledby="soon-title">
+  <div class="narrow">
+    <div class="frame">
+      <span class="stud-b"></span>
+      <h2 id="soon-title">Coming soon to iPhone and iPad</h2>
+      <p>Cryptid Hollow is in testing with friends right now. Want to help shape it before launch? Send a note and we'll let you know when there's room.</p>
+      <a class="button" href="mailto:mattstrattdev@icloud.com?subject=Cryptid%20Hollow%20beta">Ask to join the beta</a>
+    </div>
+  </div>
+</section>
+
+<section class="help" id="help" aria-labelledby="help-title">
+  <div class="narrow">
+    <h2 id="help-title">Need help?</h2>
+    <p>Email <a href="mailto:mattstrattdev@icloud.com">mattstrattdev@icloud.com</a> and we'll get back to you. It helps to include your device, iOS version and what happened.</p>
+    <details>
+      <summary>Will my farm move to my new iPhone or iPad?</summary>
+      <p>Yes. Your farm is saved in your iCloud account, so sign in with the same Apple Account and it comes along.</p>
+    </details>
+    <details>
+      <summary>I bought Moonstones but didn't get them.</summary>
+      <p>Open the shop and tap Restore purchases. If that doesn't fix it, email us.</p>
+    </details>
+    <details>
+      <summary>How do I visit a friend's farm?</summary>
+      <p>Tap the farmhouse, open the Friends tab, and enter their farm code.</p>
+    </details>
+    <footer>
+      <span>© 2026 Jobin LLC</span>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="support.html">Help page</a>
+    </footer>
+  </div>
+</section>
+
 </main>
 </body>
 </html>
