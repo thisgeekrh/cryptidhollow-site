@@ -109,6 +109,18 @@ p { margin: 0 0 14px; }
   100% { opacity: 0; transform: translate(40px,-60px); }
 }
 
+.follow { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 22px; color: var(--soft); font-size: 16px; }
+.social { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; }
+.social a {
+  display: inline-block; text-decoration: none; font-weight: 800; font-size: 15px;
+  color: var(--cream); padding: 5px 14px; border: 2px solid rgba(247,235,200,.35); border-radius: 999px;
+}
+.social a:hover { border-color: var(--lamp); color: var(--lamp); }
+.social.dark { justify-content: center; }
+.social.dark a { color: var(--ink); border-color: rgba(46,32,52,.4); }
+.social.dark a:hover { border-color: var(--ink); background: rgba(46,32,52,.08); color: var(--ink); }
+.follow-note { margin: 22px auto 10px !important; font-size: 16px; }
+
 /* ---------- Millie's letter ---------- */
 .letter-section { padding: 72px 0 40px; }
 .letter {
@@ -228,6 +240,15 @@ footer a { color: var(--soft); }
       <div class="cta-row">
         <span class="badge"><img class="px" src="assets/moonstone.png" alt="">Coming soon to iPhone and iPad</span>
         <a class="textlink" href="#neighbors">Meet the neighbors</a>
+      </div>
+      <div class="follow">
+        <span>Follow along</span>
+        <ul class="social" aria-label="Follow Cryptid Hollow">
+          <li><a href="https://www.tiktok.com/@cryptidhollowgame">TikTok</a></li>
+          <li><a href="https://www.instagram.com/cryptidhollowgame/">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@SouthernSnarkyScholar">YouTube</a></li>
+          <li><a href="https://www.threads.com/@cryptidhollowgame">Threads</a></li>
+        </ul>
       </div>
     </div>
     <div class="frame trailer">
@@ -430,6 +451,13 @@ footer a { color: var(--soft); }
       <h2 id="soon-title">Coming soon to iPhone and iPad</h2>
       <p>Cryptid Hollow is in testing with friends right now. Want to help shape it before launch? Send a note and we'll let you know when there's room.</p>
       <a class="button" href="mailto:mattstrattdev@icloud.com?subject=Cryptid%20Hollow%20beta">Ask to join the beta</a>
+      <p class="follow-note">Or follow along for new cryptids, sneak peeks and launch news:</p>
+      <ul class="social dark" aria-label="Follow Cryptid Hollow">
+          <li><a href="https://www.tiktok.com/@cryptidhollowgame">TikTok</a></li>
+          <li><a href="https://www.instagram.com/cryptidhollowgame/">Instagram</a></li>
+          <li><a href="https://www.youtube.com/@SouthernSnarkyScholar">YouTube</a></li>
+          <li><a href="https://www.threads.com/@cryptidhollowgame">Threads</a></li>
+        </ul>
     </div>
   </div>
 </section>
@@ -452,6 +480,10 @@ footer a { color: var(--soft); }
     </details>
     <footer>
       <span>© 2026 Jobin LLC</span>
+      <a href="https://www.tiktok.com/@cryptidhollowgame">TikTok</a>
+      <a href="https://www.instagram.com/cryptidhollowgame/">Instagram</a>
+      <a href="https://www.youtube.com/@SouthernSnarkyScholar">YouTube</a>
+      <a href="https://www.threads.com/@cryptidhollowgame">Threads</a>
       <a href="privacy.html">Privacy Policy</a>
       <a href="support.html">Help page</a>
     </footer>
