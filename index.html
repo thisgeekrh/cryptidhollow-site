@@ -44,7 +44,11 @@ body {
 img.px { image-rendering: pixelated; image-rendering: crisp-edges; }
 a { color: var(--lamp); }
 a:focus-visible, button:focus-visible { outline: 3px solid var(--moon); outline-offset: 3px; border-radius: 4px; }
-h1, h2, h3 { font-family: "Pixelify Sans", "Nunito", sans-serif; font-weight: 700; line-height: 1.1; margin: 0; }
+h1, h2, h3 { font-family: "Pixelify Sans", "Nunito", sans-serif; font-weight: 700; line-height: 1.1; margin: 0; font-variant-ligatures: none; }
+/* Section headings are easier to read in the body font (Matt, 25 Nov). The pixel font stays for the logo,
+   the buttons and small labels. */
+h2, h3 { font-family: "Nunito", sans-serif; font-weight: 800; letter-spacing: -0.01em; }
+.badge, .stage strong { font-variant-ligatures: none; }
 h2 { font-size: clamp(30px, 5vw, 44px); color: var(--cream); }
 h3 { font-size: 24px; }
 p { margin: 0 0 14px; }
@@ -256,8 +260,8 @@ footer a { color: var(--soft); }
       <p class="tagline">A cozy farming game where your neighbors are cryptids.</p>
       <p class="detail">Bigfoot runs the general store, Mothman delivers the mail, and Nessie lives in the pond out back. Grow crops, fill orders and fix up your Great-Aunt Millie's farmhouse in a little town full of legends.</p>
       <div class="cta-row">
-        <a class="badge" href="https://apps.apple.com/us/app/cryptid-hollow/id6833133647"><img class="px" src="assets/moonstone.png" alt="">Pre-order on the App Store</a>
-        <span class="arrives">Arrives December 15</span>
+        <a class="badge" href="https://apps.apple.com/us/app/cryptid-hollow/id6833133647"><img class="px" src="assets/moonstone.png" alt=""><span data-launch="Download now on the App Store">Pre-order on the App Store</span></a>
+        <span class="arrives" data-launch="Out now on iPhone and iPad">Arrives December 15</span>
         <a class="textlink" href="#neighbors">Meet the neighbors</a>
       </div>
       <div class="follow">
@@ -578,9 +582,9 @@ footer a { color: var(--soft); }
   <div class="narrow">
     <div class="frame">
       <span class="stud-b"></span>
-      <h2 id="soon-title">Arrives December <span class="num">15</span> on iPhone and iPad</h2>
-      <p>The neighbors are almost ready to meet you. Pre-order now and the game downloads by itself on launch day. It's free.</p>
-      <p><a class="badge" href="https://apps.apple.com/us/app/cryptid-hollow/id6833133647"><img class="px" src="assets/moonstone.png" alt="">Pre-order on the App Store</a></p>
+      <h2 id="soon-title" data-launch="Out now on iPhone and iPad">Arrives December <span class="num">15</span> on iPhone and iPad</h2>
+      <p data-launch="The neighbors are ready to meet you. Download it today. It's free.">The neighbors are almost ready to meet you. Pre-order now and the game downloads by itself on launch day. It's free.</p>
+      <p><a class="badge" href="https://apps.apple.com/us/app/cryptid-hollow/id6833133647"><img class="px" src="assets/moonstone.png" alt=""><span data-launch="Download now on the App Store">Pre-order on the App Store</span></a></p>
       <p>Follow along for new cryptids, sneak peeks and launch news.</p>
       <ul class="social dark" aria-label="Follow Cryptid Hollow">
           <li><a href="https://www.tiktok.com/@cryptidhollowgame"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>TikTok</a></li>
@@ -610,7 +614,7 @@ footer a { color: var(--soft); }
     </details>
     <details>
       <summary>When does it come out, and on what?</summary>
-      <p>December 15, 2026, on iPhone and iPad with iOS 17 or later. Pre-orders are open on the App Store now.</p>
+      <p data-launch="It came out December 15, 2026, on iPhone and iPad with iOS 17 or later. It's free on the App Store now.">December 15, 2026, on iPhone and iPad with iOS 17 or later. Pre-orders are open on the App Store now.</p>
     </details>
     <details>
       <summary>What can I collect?</summary>
@@ -643,5 +647,12 @@ footer a { color: var(--soft); }
 </section>
 
 </main>
+<script>
+/* Launch day: from December 15, 2026 in the visitor's own time zone, pre-order wording becomes "Download". */
+(function () {
+  if (new Date() < new Date(2026, 11, 15)) return;
+  document.querySelectorAll("[data-launch]").forEach(function (el) { el.innerHTML = el.getAttribute("data-launch"); });
+})();
+</script>
 </body>
 </html>

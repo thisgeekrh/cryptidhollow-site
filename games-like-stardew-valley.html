@@ -46,7 +46,7 @@ ul{padding-left:20px}
 
 <div class="card">
   <p><strong>The short answer:</strong> Cryptid Hollow is a free cozy farming game for iPhone and iPad. You grow crops, raise animals, fish, fill a museum and make friends in a small town, the way you do in Stardew Valley and Animal Crossing. The twist is the neighbors. Bigfoot runs the general store, Mothman delivers the mail and Nessie lives in the pond. It arrives December 15, 2026.</p>
-  <p><a class="button" href="https://apps.apple.com/us/app/cryptid-hollow/id6833133647">Pre-order on the App Store</a></p>
+  <p><a class="button" href="https://apps.apple.com/us/app/cryptid-hollow/id6833133647" data-launch="Download now on the App Store">Pre-order on the App Store</a></p>
 </div>
 
 <img class="shot" src="assets/shot_town.jpg" alt="The town square in Cryptid Hollow, with the General Store, the post office and a fountain">
@@ -92,17 +92,24 @@ ul{padding-left:20px}
 <h2>Common questions</h2>
 <p><strong>Is Cryptid Hollow free?</strong> Yes. It is free to download and play, with optional in-app purchases and no ads.</p>
 <p><strong>What does it play on?</strong> iPhone and iPad with iOS 17 or later. It also runs on Macs with Apple silicon.</p>
-<p><strong>When does it come out?</strong> December 15, 2026. If you pre-order, it downloads by itself on launch day.</p>
+<p data-launch="<strong>When did it come out?</strong> December 15, 2026. It's free on the App Store now."><strong>When does it come out?</strong> December 15, 2026. If you pre-order, it downloads by itself on launch day.</p>
 <p><strong>Is there combat, or a way to lose?</strong> No. Nothing attacks you and nothing wilts while you are away.</p>
 <p><strong>Can I play with friends?</strong> Yes. You can visit friends' farms, shop at their roadside stands and join a weekly derby through Game Center.</p>
 <p><strong>Who makes it?</strong> Jobin LLC, a one-person studio in the United States.</p>
 
-<p><a class="button" href="https://apps.apple.com/us/app/cryptid-hollow/id6833133647">Pre-order on the App Store</a></p>
+<p><a class="button" href="https://apps.apple.com/us/app/cryptid-hollow/id6833133647" data-launch="Download now on the App Store">Pre-order on the App Store</a></p>
 
 <p class="small">Cryptid Hollow is an independent game and is not affiliated with or endorsed by the makers of Stardew Valley, Animal Crossing or Hay Day. Those names belong to their owners.</p>
 
 <nav><a href="index.html">Home</a><a href="press.html">Press kit</a><a href="support.html">Help</a><a href="privacy.html">Privacy Policy</a></nav>
 <footer>© 2026 Jobin LLC</footer>
 </main>
+<script>
+/* Launch day: from December 15, 2026 in the visitor's own time zone, pre-order wording becomes "Download". */
+(function () {
+  if (new Date() < new Date(2026, 11, 15)) return;
+  document.querySelectorAll("[data-launch]").forEach(function (el) { el.innerHTML = el.getAttribute("data-launch"); });
+})();
+</script>
 </body>
 </html>

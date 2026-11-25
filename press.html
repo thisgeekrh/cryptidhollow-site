@@ -34,7 +34,7 @@ ul{padding-left:20px}
 <div class="card">
   <dl class="facts">
     <dt>Developer</dt><dd>Jobin LLC, a one-person studio in the United States</dd>
-    <dt>Release date</dt><dd>December 15, 2026 (pre-orders open now)</dd>
+    <dt>Release date</dt><dd data-launch="December 15, 2026 (out now)">December 15, 2026 (pre-orders open now)</dd>
     <dt>Platforms</dt><dd>iPhone and iPad, iOS 17 or later</dd>
     <dt>Genre</dt><dd>Cozy farming and life sim</dd>
     <dt>App Store</dt><dd><a href="https://apps.apple.com/app/id6833133647">apps.apple.com/app/id6833133647</a></dd>
@@ -86,5 +86,12 @@ ul{padding-left:20px}
 <nav><a href="index.html">Home</a><a href="support.html">Support</a><a href="privacy.html">Privacy Policy</a></nav>
 <footer>© 2026 Jobin LLC</footer>
 </main>
+<script>
+/* Launch day: from December 15, 2026 in the visitor's own time zone, pre-order wording becomes "Download". */
+(function () {
+  if (new Date() < new Date(2026, 11, 15)) return;
+  document.querySelectorAll("[data-launch]").forEach(function (el) { el.innerHTML = el.getAttribute("data-launch"); });
+})();
+</script>
 </body>
 </html>
